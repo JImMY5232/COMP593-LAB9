@@ -46,9 +46,16 @@ def main():
         image_path =os.path.join(image_dir,pokemon_name +'.png')
         if down_image_frm_url(image_url, image_path):
             img_pokemon['file'] = image_path
+            desktop_btn.state(['!disabled'])
 
-        pokemon_sel_cbo.bind('<<ComboboxSelected>>', handle_pokemon_sel_cbo)
-    desktop_btn = ttk.Button(frm, text='Set as Desktop Image')
+    pokemon_sel_cbo.bind('<<ComboboxSelected>>', handle_pokemon_sel_cbo)
+    
+    def desktop_btn_click():
+        pokemon_name = pokemon_sel_cbo.get()
+        image_path = os.path.join(image_dir, pokemon_name +'.png')
+        set_desktop_bg(image_path)
+
+    desktop_btn = ttk.Button(frm, text='Set as Desktop Image', command=desktop_btn_click)
     desktop_btn.state(['disabled'])
     desktop_btn.grid(row=2,column=0,padx=10,pady=10)
 
@@ -57,7 +64,7 @@ def main():
 def set_desktop_bg(path):
 
     try:
-     ctypes.windll.user32.SystemParametersInfoW(20, 0, "absolute path", 0)
+     ctypes.windll.user32.SystemParametersInfoW(20, 0, path, 0)
     except:
         print("Error setting desktop background image")
 
