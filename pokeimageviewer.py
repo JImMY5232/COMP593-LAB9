@@ -43,6 +43,13 @@ def main():
     pokemon_sel_cbo.grid(row=1, column=0)
     #create new fuction for handle event
     def handle_pokemon_sel_cbo(event):
+        """
+        This is a fuction for handle all events in the gui
+
+        :param param1: event
+        :returns: none
+        
+        """
         pokemon_name = pokemon_sel_cbo.get()
         image_url = get_pokemon_img_url(pokemon_name)
         image_path =os.path.join(image_dir,pokemon_name +'.png')
@@ -53,6 +60,14 @@ def main():
     pokemon_sel_cbo.bind('<<ComboboxSelected>>', handle_pokemon_sel_cbo)
     #fuction for button
     def desktop_btn_click():
+        
+        """
+        This is a fuction for create and make the button for set image as backgroud
+
+        :param param1: 
+        :returns: none
+        
+        """
         pokemon_name = pokemon_sel_cbo.get()
         image_path = os.path.join(image_dir, pokemon_name +'.png')
         set_desktop_bg(image_path)
@@ -63,14 +78,33 @@ def main():
 
     root.mainloop()
 # create a fuction which make the downloaded picture as system background
+
 def set_desktop_bg(path):
+
+    """
+    This is a fuction for the path where image downloads
+
+    :param param1: path
+    :returns: none
+    
+    """
 
     try:
      ctypes.windll.user32.SystemParametersInfoW(20, 0, path, 0)
     except:
         print("Error setting desktop background image")
+
 #created a fuction  for download the image from the url
 def down_image_frm_url(url, path):
+
+    """
+        This is a fuction for download image from the url
+
+        :param param1: url
+        :param param2: path
+        :returns: the path 
+        
+    """
 
     if os.path.isfile(path):
         return path
