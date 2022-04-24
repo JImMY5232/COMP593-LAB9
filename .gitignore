@@ -3,11 +3,16 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+
+
+images
+__pycache__
+
 # C extensions
 *.so
 *.png
 *.ico
-pokeball.png
+
 # Distribution / packaging
 .Python
 build/
